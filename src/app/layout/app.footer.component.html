@@ -1,11 +1,20 @@
-<div class="layout-footer">
-    <img [src]="'assets/layout/images/footer-' + (layoutService.config.colorScheme === 'light' ? 'avalon' : 'avalon-dark') + '.svg'" alt="avalon-footer-logo">
+<div class="layout-footer layout-footer-clean">
+    <div class="flex flex-column sm:flex-row sm:align-items-center justify-content-center footer-inner">
+        <div class="flex align-items-center justify-content-center" style="gap: .75rem;">
+            <img [src]="'assets/charisma/images/blocks/logos/hyper.svg'" alt="footer-logo" height="28">
+            <div class="line-height-3 text-600">&copy; 2026 CengizDonegel. All rights reserved</div>
+        </div>
 
-    <span>All Rights Reserved 2026 &#64;CengizDonegel</span>
-
-    <div class="flex gap-2">
-        <button pButton pRipple type="button" icon="pi pi-github" class="p-button-rounded p-button-text p-button-plain"></button>
-        <button pButton pRipple type="button" icon="pi pi-facebook" class="p-button-rounded p-button-text p-button-plain"></button>
-        <button pButton pRipple type="button" icon="pi pi-twitter" class="p-button-rounded p-button-text p-button-plain"></button>
+        <div class="mt-2 sm:mt-0 footer-links">
+            <a class="footer-icon-link" aria-label="Twitter">
+                <i class="pi pi-twitter text-xl"></i>
+            </a>
+            <a class="footer-icon-link ml-3" aria-label="Facebook">
+                <i class="pi pi-facebook text-xl"></i>
+            </a>
+            <a class="footer-icon-link ml-3" aria-label="GitHub">
+                <i class="pi pi-github text-xl"></i>
+            </a>
+        </div>
     </div>
 </div>

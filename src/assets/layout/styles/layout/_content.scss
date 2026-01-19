@@ -1,11 +1,14 @@
 .layout-content-wrapper {
     padding-top: 4rem;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     
     .layout-content {
         flex: 1 1 auto;
         padding: 2rem;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }

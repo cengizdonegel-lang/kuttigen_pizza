@@ -1,19 +1,17 @@
-.container {
-    width: 1000px;
-    height: 300px;
-    border: 3px solid blue; /*Visually show where the div is.*/
-}
-.container > img {
-    object-fit: cover; /* Cover  means that the img will fill the box and preserve its aspect ratio  */
-    object-position: center; /* Position of the image in it's parent */
-    width: 100%;
-    height: 100%;
-}
-.image-container {
-    display: flex;
-    justify-content: center; /* Yatay merkezleme */
-    align-items: center; /* Dikey merkezleme */
-    height: 100vh; /* Sayfanın tamamını kaplasın */
+.menu-container {
+    /* Very light orange */
+    background-color: #fff4e6;
 }
 
+.menu-action {
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    will-change: transform;
+}
 
+.menu-action:hover {
+    transform: scale(1.06);
+}
+
+.menu-action:active {
+    transform: scale(1.02);
+}

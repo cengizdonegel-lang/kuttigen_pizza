@@ -3,7 +3,8 @@ import { AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { Carousel } from 'primeng/carousel';
 
 @Component({
-    templateUrl: './productlist.component.html'
+    templateUrl: './productlist.component.html',
+    styleUrls: ['./product.css']
 })
 export class ProductListComponent implements AfterViewInit, OnDestroy{
 
