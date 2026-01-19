@@ -20,4 +20,358 @@ $gutter: 1rem; //for primeflex grid system
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+	position: relative;
+	/* Base "iPhone rain" wallpaper vibe */
+	min-height: 100%;
+	background-color: #1a2028 !important;
+	background-image:
+		radial-gradient(1200px 800px at 20% 10%, rgba(255, 237, 213, 0.48) 0%, rgba(26, 32, 40, 0.88) 58%, rgba(18, 22, 28, 1) 100%);
+	background-size: cover;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}
+
+body {
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+	background: transparent !important;
+	background-color: transparent !important;
+	position: relative;
+	z-index: 1;
+}
+
+/* Animated rain overlay (CSS-only; iOS-friendly) */
+html::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	/* Layer 1: subtle mist. Layer 2/3: rain streaks */
+	background-image:
+		radial-gradient(900px 600px at 70% 20%, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 62%),
+		repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.16) 0 1px, rgba(255, 255, 255, 0) 1px 14px),
+		repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.07) 0 1px, rgba(255, 255, 255, 0) 1px 22px);
+	background-size:
+		cover,
+		320px 320px,
+		520px 520px;
+	background-position:
+		0 0,
+		0 0,
+		0 0;
+	opacity: 0.55;
+	filter: blur(0.2px);
+	transform: translateZ(0);
+	animation: rainMove 1.9s linear infinite;
+}
+
+body::before {
+	/* Prevent any other stylesheet from defining a second overlay */
+	content: none !important;
+}
+
+.layout-container {
+	position: relative;
+	z-index: 2;
+}
+
+app-root {
+	position: relative;
+	z-index: 2;
+}
+
+@keyframes rainMove {
+	from {
+		background-position:
+			0 0,
+			0 0,
+			0 0;
+	}
+	to {
+		background-position:
+			0 0,
+			-180px 620px,
+			-260px 980px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html::before {
+		animation: none;
+	}
+}
+
+/* Sidebar/menu panel: glass on all devices */
+.layout-menu-dark,
+.layout-menu-light {
+	--menu-bg: var(--glass-bg-strong);
+}
+
+.layout-sidebar {
+	background: var(--glass-bg-strong) !important;
+	background-color: var(--glass-bg-strong) !important;
+	background-image: var(--glass-rain-2);
+	background-size: cover;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	border-right: 1px solid var(--glass-border);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+}
+
+/* Topbar: rain-glass surface (wallpaper is global now) */
+.layout-topbar {
+	background-color: var(--glass-bg-strong);
+	background-image: var(--glass-rain-2);
+	background-size: cover;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid rgba(251, 146, 60, 0.30);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+}
+
+.layout-topbar::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		90deg,
+		rgba(255, 237, 213, 0.25) 0%,
+		rgba(255, 237, 213, 0.14) 45%,
+		rgba(255, 237, 213, 0.25) 100%
+	);
+	pointer-events: none;
+}
+
+.layout-topbar > * {
+	position: relative;
+}
+
+.layout-topbar .layout-topbar-start,
+.layout-topbar .layout-topbar-end {
+	margin: 0.5rem;
+	border-radius: 14px;
+	background: rgba(255, 255, 255, 0.55);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.layout-topbar .layout-topbar-start {
+	padding: 0.5rem 0.75rem;
+	margin-left: 2.1rem;
+	padding-left: 2.1rem;
+	background: transparent;
+	box-shadow: none;
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+}
+
+.layout-topbar .layout-topbar-end {
+	padding: 0 1rem;
+	background: transparent;
+	box-shadow: none;
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+}
+
+.layout-topbar .layout-topbar-start .layout-topbar-logo {
+	width: auto;
+	height: 44px;
+	border-radius: 10px;
+	background: transparent;
+	box-shadow: none;
+	border: 0;
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.layout-topbar .layout-topbar-start .layout-topbar-logo img {
+	height: 34px;
+	width: auto;
+	display: block;
+}
+
+.layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items > li > a {
+	background-color: rgba(255, 255, 255, 0.35);
+	border: 1px solid rgba(251, 146, 60, 0.35);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+}
+
+.layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items > li > a:hover {
+	background-color: rgba(255, 237, 213, 0.7);
+}
+
+/* Topbar search (input + icon inside) */
+.layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items > li.layout-topbar-search {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-right: 0.25rem;
+}
+
+.layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items > li.layout-topbar-search > input {
+	width: 220px;
+	height: 2.5rem;
+	border-radius: 999px;
+	border: 1px solid rgba(251, 146, 60, 0.35);
+	background: rgba(255, 255, 255, 0.35);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	padding: 0 2.25rem 0 1rem;
+	outline: none;
+	color: var(--text-color);
+}
+
+.layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items > li.layout-topbar-search > input::placeholder {
+	color: rgba(71, 85, 105, 0.75);
+}
+
+.layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items > li.layout-topbar-search > input:focus {
+	border-color: rgba(251, 146, 60, 0.7);
+	box-shadow: 0 0 0 0.25rem rgba(251, 146, 60, 0.18);
+}
+
+.layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items > li.layout-topbar-search > i {
+	position: absolute;
+	right: 0.9rem;
+	color: rgba(71, 85, 105, 0.9);
+	font-size: 1rem;
+	pointer-events: none;
+}
+
+@media screen and (max-width: 991px) {
+	.layout-topbar .layout-topbar-end .layout-topbar-actions-end .layout-topbar-items > li.layout-topbar-search {
+		display: none;
+	}
+}
+
+/* Mobile: keep topbar structure but right-align the combined menu toggle */
+@media screen and (max-width: 991px) {
+	.layout-topbar .layout-topbar-start {
+		width: 100%;
+	}
+
+	.layout-topbar .layout-topbar-start .layout-menu-button {
+		position: static !important;
+		top: auto !important;
+		right: auto !important;
+		margin-top: 0 !important;
+		width: auto !important;
+		padding: 0 0.9rem !important;
+		border-radius: 999px !important;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		column-gap: 0.5rem;
+		margin-left: auto !important;
+		margin-right: 0 !important;
+	}
+
+	.layout-topbar .layout-topbar-start .layout-menu-button i {
+		font-size: 1.25rem;
+		line-height: 1;
+	}
+
+	.layout-topbar .layout-topbar-start .layout-menu-button .topbar-menu-label {
+		display: inline-block;
+		margin-left: 0.5rem;
+		font-weight: 600;
+		font-size: 0.95rem;
+		line-height: 1;
+		white-space: nowrap;
+	}
+}
+
+/* Desktop: keep original compact icon-only button */
+@media screen and (min-width: 992px) {
+	.layout-topbar .layout-topbar-start .layout-menu-button .topbar-menu-label {
+		display: none;
+	}
+}
+
+/* Global: keep page backgrounds transparent (so wallpaper shows through) */
+:root {
+	--surface-ground: transparent;
+	--surface-card: rgba(255, 255, 255, 0.12);
+	--surface-overlay: rgba(255, 255, 255, 0.16);
+	--glass-bg: rgba(255, 255, 255, 0.06);
+	--glass-bg-strong: rgba(255, 255, 255, 0.13);
+	--glass-border: rgba(251, 146, 60, 0.22);
+	--glass-rain-1: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.08) 0 1px, rgba(255, 255, 255, 0) 1px 18px);
+	--glass-rain-2: radial-gradient(900px 600px at 30% 10%, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 62%);
+}
+
+.layout-content-wrapper,
+.layout-content-wrapper .layout-content {
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+.layout-footer,
+.layout-breadcrumb-container {
+	background: transparent !important;
+	background-color: transparent !important;
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}
+
+/* PrimeNG/common surfaces: lighter for cards, stronger for overlays */
+.p-card,
+.p-panel,
+.p-fieldset,
+.p-toolbar,
+.p-tabview .p-tabview-panels,
+.p-dataview .p-dataview-content,
+.p-datatable .p-datatable-wrapper,
+.p-datatable .p-datatable-header,
+.p-datatable .p-datatable-footer,
+.p-paginator {
+	background-color: var(--glass-bg) !important;
+	background-image: var(--glass-rain-2);
+	background-size: cover;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	border: 1px solid var(--glass-border);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+
+.p-toast .p-toast-message,
+.p-overlaypanel,
+.p-dialog .p-dialog-header,
+.p-dialog .p-dialog-content,
+.p-dialog .p-dialog-footer,
+.p-sidebar,
+.p-menu,
+.p-tieredmenu,
+.p-dropdown-panel,
+.p-multiselect-panel,
+.p-autocomplete-panel,
+.p-datepicker {
+	background-color: var(--glass-bg-strong) !important;
+	background-image: var(--glass-rain-2);
+	background-size: cover;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	border: 1px solid var(--glass-border);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}
+
+@media screen and (max-width: 991px) {
+	:root {
+		--surface-card: rgba(255, 255, 255, 0.10);
+		--surface-overlay: rgba(255, 255, 255, 0.12);
+		--glass-bg: rgba(255, 255, 255, 0.055);
+		--glass-bg-strong: rgba(255, 255, 255, 0.12);
+		--glass-rain-1: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.075) 0 1px, rgba(255, 255, 255, 0) 1px 20px);
+		--glass-rain-2: radial-gradient(900px 600px at 30% 10%, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 65%);
+	}
+}

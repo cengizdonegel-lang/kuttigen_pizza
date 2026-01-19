@@ -375,7 +375,7 @@ p:last-child {
 }
 
 .layout-menu-light {
-  --menu-bg: #ffffff;
+  --menu-bg: var(--menuitem-hover-bg);
   --root-menuitem-text-color: #657380;
   --menuitem-text-color: #515C66;
   --menuitem-hover-bg: rgba(0,0,0,.04);
@@ -385,7 +385,7 @@ p:last-child {
 }
 
 .layout-menu-dark {
-  --menu-bg: #2a323d;
+  --menu-bg: var(--menuitem-hover-bg);
   --root-menuitem-text-color: rgba(255,255,255,.60);
   --menuitem-text-color: rgba(255,255,255,.87);
   --menuitem-hover-bg: hsla(0,0%,100%,.04);

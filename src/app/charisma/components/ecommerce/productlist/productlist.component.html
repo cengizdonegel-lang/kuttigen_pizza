@@ -1,10 +1,19 @@
+<video class="productlist-bg-video" autoplay muted loop playsinline preload="auto">
+    <source src="https://cdn.pixabay.com/video/2018/07/08/17176-278954641_large.mp4" type="video/mp4" />
+</video>
+<div class="productlist-bg-overlay"></div>
 
 <div class="product-marquee">
     <div class="product-track">
 
         <ng-container *ngFor="let product of products2">
             <div class="product-item">
-                <div class="surface-card shadow-2 border-round p-4 marquee-card">
+                <div class="card border-3 border-orange-100 border-round-2xl p-4 marquee-card
+                    transition-all transition-duration-300 ease-out
+                    hover:border-orange-400
+                    hover:bg-orange-50
+                    hover:shadow-4
+                    hover:scale-105">
 
                     <!-- ÜST KISIM (avatar + bilgiler) -->
                     <div class="flex border-bottom-1 surface-border pb-4 align-items-start">
@@ -56,7 +65,12 @@
         <!-- kopya: kesintisiz akış için -->
         <ng-container *ngFor="let product of products2">
             <div class="product-item">
-                <div class="surface-card shadow-2 border-round p-4 marquee-card">
+                <div class="card border-3 border-orange-100 border-round-2xl p-4 marquee-card
+                    transition-all transition-duration-300 ease-out
+                    hover:border-orange-400
+                    hover:bg-orange-50
+                    hover:shadow-4
+                    hover:scale-105">
 
                     <div class="flex border-bottom-1 surface-border pb-4 align-items-start">
                         <img

@@ -1,57 +1,28 @@
 <div
     class="layout-topbar"
     [ngClass]="{'border-bottom-none': layoutService.config.topbarTheme !== 'light'}"
-    style="
-    background: rgba(255, 237, 213, 0.92);
-    border-bottom: 1px solid rgba(251,146,60,.35);
-    backdrop-filter: blur(6px);
-  "
 >
-    <div class="layout-topbar-start ml-auto flex align-items-center gap-3">
 
-        <!-- HAFİF TEMEL REİS STİL LOGO -->
-        <img
-            src="assets/images/branding/temel-reis-style.svg"
-            alt="Sailor Logo"
-            style="
-            height: 32px;
-            opacity: 0.35;
-            filter: sepia(1) saturate(2) hue-rotate(350deg);
-        "
-        />
-
-        <!-- ANA LOGO -->
+    <div class="layout-topbar-start">
         <a class="layout-topbar-logo" routerLink="/">
-            <svg width="190"
-                 viewBox="0 0 1210 356"
-                 preserveAspectRatio="xMidYMid meet">
-                <!-- mevcut svg -->
-            </svg>
+            <img src="assets/layout/images/logo.svg" alt="logo" />
         </a>
 
-        <a #menuButton class="layout-menu-button" (click)="onMenuButtonClick()" pRipple>
-            <i class="pi pi-angle-right"></i>
-        </a>
-
-        <a #mobileMenuButton class="layout-topbar-mobile-button"
-           (click)="onMobileTopbarMenuButtonClick()" pRipple>
-            <i class="pi pi-bars text-4xl"></i>
-        </a>
-
+        <button #menuButton type="button" class="layout-menu-button p-link" (click)="onMenuButtonClick()">
+            <i class="pi pi-bars"></i>
+            <span class="topbar-menu-label">Menu</span>
+        </button>
     </div>
 
     <div class="layout-topbar-end">
         <div class="layout-topbar-actions-end">
             <ul class="layout-topbar-items">
 
-                <li class="layout-topbar-search">
-                    <input type="text" placeholder="Search">
-                    <i class="pi-fw pi pi-search"></i>
+                <li>
+                    <a pRipple pBadge [value]="'2'" severity="info">
+                        <i class="pi pi-heart"></i>
+                    </a>
                 </li>
-
-                <div class="flex flex-wrap gap-2">
-                    <i class="pi pi-heart mr-2 p-text-secondary" pBadge style="font-size: 2rem" [value]="'2'" severity="info" ></i>
-                </div>
 
                 <li>
                     <a pStyleClass="@next" enterClass="ng-hidden" enterActiveClass="px-scalein" leaveToClass="ng-hidden" leaveActiveClass="px-fadeout" [hideOnOutsideClick]="true" pRipple>

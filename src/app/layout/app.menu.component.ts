@@ -9,12 +9,15 @@ import {Menu} from "../charisma/api/menu";
 
 @Component({
     selector: 'app-menu',
-    templateUrl: '../layout/app.menu.component.html'
+	templateUrl: '../layout/app.menu.component.html',
+	styleUrls: ['./app.menu.component.css']
 })
 export class AppMenuComponent implements OnInit {
 
     model: any[] = [];
     @Input()  permissionMenu:any[] = [];
+	filteredPermissionMenu: any[] = [];
+	private menuQuery = '';
 
 
     constructor(private userService: UserService,
@@ -38,9 +41,11 @@ export class AppMenuComponent implements OnInit {
                  }))
              }));
              this.crateMeneuContent();
+			 this.applyMenuFilter();
              console.log(this.model); // Sonucu logla
          });
         this.crateMeneuContent();
+		this.applyMenuFilter();
 
 
         // this.model = [
@@ -529,6 +534,24 @@ export class AppMenuComponent implements OnInit {
                 return object.permission !=="Admin";
             });
         }
+        this.applyMenuFilter();
+    }
+
+    onMenuSearch(event: Event): void {
+        this.menuQuery = (event.target as HTMLInputElement)?.value ?? '';
+        this.applyMenuFilter();
+    }
+
+    private applyMenuFilter(): void {
+        const query = this.menuQuery.trim().toLowerCase();
+        if (!query) {
+            this.filteredPermissionMenu = [...(this.permissionMenu ?? [])];
+            return;
+        }
+
+        this.filteredPermissionMenu = (this.permissionMenu ?? []).filter(item =>
+            (item?.label ?? '').toString().toLowerCase().includes(query)
+        );
     }
     onMenuClick(item: any): void {
         console.log('Tıklanan menu item:', item);

@@ -41,10 +41,10 @@ export class LayoutService {
         inputStyle: 'outlined',
         menuMode: 'slim',
         colorScheme: 'light',
-        componentTheme: 'yellow',
+        componentTheme: 'orange',
         scale: 14,
         menuTheme: 'dark',
-        topbarTheme: 'yellow',
+        topbarTheme: 'orange',
         menuProfilePosition: 'start'
     };
 
@@ -71,6 +71,8 @@ export class LayoutService {
 
     private menuProfileOpen = new Subject<any>();
 
+    private stateChange = new Subject<LayoutState>();
+
     configUpdate$ = this.configUpdate.asObservable();
 
     overlayOpen$ = this.overlayOpen.asObservable();
@@ -78,6 +80,12 @@ export class LayoutService {
     topbarMenuOpen$ = this.topbarMenuOpen.asObservable();
 
     menuProfileOpen$ = this.menuProfileOpen.asObservable();
+
+    stateChange$ = this.stateChange.asObservable();
+
+    emitStateChange() {
+        this.stateChange.next(this.state);
+    }
 
     onMenuToggle() {
         if (this.isOverlay()) {
@@ -98,6 +106,8 @@ export class LayoutService {
                 this.overlayOpen.next(null);
             }
         }
+
+        this.emitStateChange();
     }
 
     onTopbarMenuToggle() {
@@ -105,6 +115,8 @@ export class LayoutService {
         if (this.state.topbarMenuActive) {
             this.topbarMenuOpen.next(null);
         }
+
+        this.emitStateChange();
     }
 
     onOverlaySubmenuOpen() {

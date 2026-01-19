@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="320" viewBox="0 0 1600 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background: dark oven cavity -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#12161C"/>
+      <stop offset="0.55" stop-color="#1B232D"/>
+      <stop offset="1" stop-color="#0E1218"/>
+    </linearGradient>
+
+    <!-- Warm glow -->
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(820 210) rotate(90) scale(210 740)">
+      <stop offset="0" stop-color="#FFD29A" stop-opacity="0.85"/>
+      <stop offset="0.35" stop-color="#FF8A3D" stop-opacity="0.55"/>
+      <stop offset="0.75" stop-color="#FF3D00" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Flame gradients -->
+    <linearGradient id="flameOuter" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF2C6"/>
+      <stop offset="0.3" stop-color="#FFC36A"/>
+      <stop offset="0.65" stop-color="#FF7A2A"/>
+      <stop offset="1" stop-color="#FF2D00"/>
+    </linearGradient>
+
+    <linearGradient id="flameInner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="0.35" stop-color="#FFE9A8" stop-opacity="0.95"/>
+      <stop offset="0.75" stop-color="#FF9B4A" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FF3D00" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <!-- Soft blur for glow blobs -->
+    <filter id="blur18" x="-20%" y="-60%" width="140%" height="220%" filterUnits="objectBoundingBox">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+
+    <!-- Slight blur for flames -->
+    <filter id="blur6" x="-10%" y="-30%" width="120%" height="160%" filterUnits="objectBoundingBox">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+
+    <!-- Vignette -->
+    <radialGradient id="vignette" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(800 160) rotate(90) scale(170 860)">
+      <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="0.72" stop-color="#000000" stop-opacity="0.0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+
+    <!-- Embers -->
+    <linearGradient id="ember" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFD39A" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#FF7A2A" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FF2D00" stop-opacity="0.65"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1600" height="320" fill="url(#bg)"/>
+
+  <!-- Warm glow pool -->
+  <rect x="0" y="0" width="1600" height="320" fill="url(#glow)"/>
+
+  <!-- Subtle glow blobs -->
+  <g filter="url(#blur18)" opacity="0.55">
+    <ellipse cx="470" cy="265" rx="240" ry="82" fill="#FF7A2A"/>
+    <ellipse cx="860" cy="260" rx="320" ry="96" fill="#FF8A3D"/>
+    <ellipse cx="1210" cy="270" rx="260" ry="84" fill="#FF5A1F"/>
+  </g>
+
+  <!-- Flames group (stylized, original shapes) -->
+  <g filter="url(#blur6)">
+    <!-- Outer flames -->
+    <path d="M610 300C585 260 610 238 620 215C635 180 615 165 605 145C590 113 612 78 650 60C636 86 667 108 676 132C688 163 662 178 662 205C662 240 700 250 700 300H610Z" fill="url(#flameOuter)" opacity="0.95"/>
+    <path d="M735 300C708 265 728 242 746 212C768 176 748 150 742 128C733 95 760 72 802 58C782 88 816 108 828 134C844 172 812 189 812 218C812 248 842 258 852 300H735Z" fill="url(#flameOuter)" opacity="0.95"/>
+    <path d="M890 300C865 270 886 248 906 218C930 182 913 154 910 132C905 95 936 70 978 56C954 92 992 110 1006 140C1022 174 990 194 992 224C994 254 1022 262 1040 300H890Z" fill="url(#flameOuter)" opacity="0.92"/>
+
+    <!-- Inner flames -->
+    <path d="M660 300C645 272 658 252 670 232C684 209 673 194 670 178C666 155 680 138 706 128C696 150 714 166 720 184C728 208 712 220 712 242C712 266 732 274 736 300H660Z" fill="url(#flameInner)" opacity="0.9"/>
+    <path d="M785 300C770 274 784 256 796 236C812 211 802 192 800 176C796 150 814 132 842 124C830 150 852 166 860 186C870 212 850 224 850 246C850 270 870 276 878 300H785Z" fill="url(#flameInner)" opacity="0.88"/>
+    <path d="M940 300C925 276 940 258 956 238C974 214 966 194 966 178C966 150 986 132 1014 124C998 154 1024 170 1032 192C1044 222 1020 232 1022 254C1024 276 1042 280 1050 300H940Z" fill="url(#flameInner)" opacity="0.86"/>
+  </g>
+
+  <!-- Embers / sparks (small dots) -->
+  <g opacity="0.9">
+    <circle cx="520" cy="120" r="2" fill="url(#ember)"/>
+    <circle cx="560" cy="92" r="1.5" fill="url(#ember)"/>
+    <circle cx="610" cy="110" r="1.7" fill="url(#ember)"/>
+    <circle cx="740" cy="88" r="2" fill="url(#ember)"/>
+    <circle cx="815" cy="70" r="1.6" fill="url(#ember)"/>
+    <circle cx="900" cy="98" r="1.8" fill="url(#ember)"/>
+    <circle cx="1010" cy="86" r="2" fill="url(#ember)"/>
+    <circle cx="1120" cy="118" r="1.7" fill="url(#ember)"/>
+    <circle cx="1180" cy="90" r="1.5" fill="url(#ember)"/>
+    <circle cx="1260" cy="110" r="1.7" fill="url(#ember)"/>
+  </g>
+
+  <!-- Vignette on top for depth -->
+  <rect x="0" y="0" width="1600" height="320" fill="url(#vignette)"/>
+</svg>

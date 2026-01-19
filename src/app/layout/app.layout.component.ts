@@ -18,6 +18,8 @@ export class AppLayoutComponent implements OnDestroy {
 
     menuProfileOpenSubscription: Subscription;
 
+    stateChangeSubscription: Subscription;
+
     menuOutsideClickListener: any;
 
     menuScrollListener: any;
@@ -63,7 +65,7 @@ export class AppLayoutComponent implements OnDestroy {
             if (!this.topbarMenuOutsideClickListener) {
                 this.topbarMenuOutsideClickListener = this.renderer.listen('document', 'click', event => {
                     const isOutsideClicked = !(this.appTopbar.el.nativeElement.isSameNode(event.target) || this.appTopbar.el.nativeElement.contains(event.target)
-                        || this.appTopbar.mobileMenuButton.nativeElement.isSameNode(event.target) || this.appTopbar.mobileMenuButton.nativeElement.contains(event.target));
+                        || this.appTopbar.menuButton.nativeElement.isSameNode(event.target) || this.appTopbar.menuButton.nativeElement.contains(event.target));
                     if (isOutsideClicked) {
                         this.hideTopbarMenu();
                     }
@@ -72,6 +74,21 @@ export class AppLayoutComponent implements OnDestroy {
 
             if (this.layoutService.state.staticMenuMobileActive) {
                 this.blockBodyScroll();
+            }
+        });
+
+        this.stateChangeSubscription = this.layoutService.stateChange$.subscribe(() => {
+            // If menus are closed by toggle buttons (not outside click), cleanup listeners + body scroll.
+            if (!this.layoutService.state.staticMenuMobileActive && this.menuOutsideClickListener) {
+                this.hideMenu();
+            }
+
+            if (!this.layoutService.state.topbarMenuActive && this.topbarMenuOutsideClickListener) {
+                this.hideTopbarMenu();
+            }
+
+            if (!this.layoutService.state.staticMenuMobileActive && !this.layoutService.state.topbarMenuActive) {
+                this.unblockBodyScroll();
             }
         });
 
@@ -180,6 +197,10 @@ export class AppLayoutComponent implements OnDestroy {
     ngOnDestroy() {
         if (this.overlayMenuOpenSubscription) {
             this.overlayMenuOpenSubscription.unsubscribe();
+        }
+
+        if (this.stateChangeSubscription) {
+            this.stateChangeSubscription.unsubscribe();
         }
 
         if (this.menuOutsideClickListener) {

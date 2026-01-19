@@ -1,9 +1,10 @@
 .layout-menu-dark {
-    --menu-bg: var(--menuitem-hover-bg);
+    /* Translucent "glass" menu background (lets the rain show through) */
+    --menu-bg: rgba(96, 70, 53, 0.72);
     --root-menuitem-text-color: rgba(255,255,255,.60);
     --menuitem-text-color: rgba(255,255,255,.87);
-    --menuitem-hover-bg: hsla(0,0%,100%,.04);
+    --menuitem-hover-bg: hsla(0,0%,100%,.08);
     --active-menuitem-text-color: rgba(255,255,255,.87);
-    --active-menuitem-bg: hsla(0,0%,100%,.04);
+    --active-menuitem-bg: hsla(0,0%,100%,.10);
     --inline-menu-border-color: hsla(0,0%,100%,.12);
 }

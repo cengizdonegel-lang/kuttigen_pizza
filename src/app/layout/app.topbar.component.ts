@@ -8,8 +8,6 @@ import { LayoutService } from './service/app.layout.service';
 export class AppTopbarComponent {
     
     @ViewChild('menuButton') menuButton!: ElementRef;
-
-    @ViewChild('mobileMenuButton') mobileMenuButton!: ElementRef;
     
     constructor(public layoutService: LayoutService, public el: ElementRef) {}
 
@@ -20,12 +18,25 @@ export class AppTopbarComponent {
     }
 
     onMenuButtonClick() {
+        if (this.layoutService.isMobile()) {
+            const anyOpen = this.layoutService.state.staticMenuMobileActive || this.layoutService.state.topbarMenuActive;
+
+            if (anyOpen) {
+                // Close both (cleanup is handled by AppLayoutComponent via stateChange$).
+                this.layoutService.state.staticMenuMobileActive = false;
+                this.layoutService.state.overlayMenuActive = false;
+                this.layoutService.state.topbarMenuActive = false;
+                this.layoutService.emitStateChange();
+                return;
+            }
+
+            // Open both.
+            this.layoutService.onMenuToggle();
+            this.layoutService.onTopbarMenuToggle();
+            return;
+        }
+
         this.layoutService.onMenuToggle();
-    }
-
-
-    onMobileTopbarMenuButtonClick() {
-        this.layoutService.onTopbarMenuToggle();
     }
 
 }

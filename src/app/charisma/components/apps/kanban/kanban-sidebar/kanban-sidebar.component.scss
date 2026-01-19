@@ -6,7 +6,11 @@
             gap: 0.5rem;
 
             .p-autocomplete-token {
-                background: var(--surface-ground);
+                background-color: var(--glass-bg-strong);
+                background-image: var(--glass-rain-2), var(--glass-rain-1);
+                background-size: cover, 420px 420px;
+                background-position: 0 0, 0 0;
+                background-repeat: no-repeat, repeat;
                 border: 1px solid var(--surface-border);
             }
         }
