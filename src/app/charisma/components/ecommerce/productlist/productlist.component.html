@@ -1,0 +1,159 @@
+
+<div class="product-marquee">
+    <div class="product-track">
+
+        <ng-container *ngFor="let product of products2">
+            <div class="product-item">
+                <div class="surface-card shadow-2 border-round p-4 marquee-card">
+
+                    <!-- ÜST KISIM (avatar + bilgiler) -->
+                    <div class="flex border-bottom-1 surface-border pb-4 align-items-start">
+                        <img
+                            [src]="product.image"
+                            [alt]="product.color"
+                            style="width: 70px; height: 70px; object-fit: cover;"
+                            class="mr-3 border-circle"
+                        />
+
+                        <div class="flex flex-column align-items-start">
+              <span class="text-xl text-900 font-medium mb-1">
+                {{ product.color }}
+              </span>
+
+                            <span class="text-600 font-medium mb-2">
+                ${{ 20 }}
+              </span>
+
+                            <span class="bg-blue-50 text-blue-400 border-round inline-flex py-1 px-2 text-sm">
+                {{ product.color }}
+              </span>
+                        </div>
+                    </div>
+
+                    <!-- ALT KISIM (butonlar) -->
+                    <div class="flex justify-content-between pt-4">
+                        <button
+                            pButton
+                            pRipple
+                            label="View"
+                            icon="pi pi-search"
+                            class="p-button-outlined p-button-secondary w-6 mr-2"
+                        ></button>
+
+                        <button
+                            pButton
+                            pRipple
+                            label="Follow"
+                            icon="pi pi-user-plus"
+                            class="p-button-outlined p-button-secondary w-6 ml-2"
+                        ></button>
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- kopya: kesintisiz akış için -->
+        <ng-container *ngFor="let product of products2">
+            <div class="product-item">
+                <div class="surface-card shadow-2 border-round p-4 marquee-card">
+
+                    <div class="flex border-bottom-1 surface-border pb-4 align-items-start">
+                        <img
+                            [src]="product.image"
+                            [alt]="product.color"
+                            style="width: 70px; height: 70px; object-fit: cover;"
+                            class="mr-3 border-circle"
+                        />
+
+                        <div class="flex flex-column align-items-start">
+              <span class="text-xl text-900 font-medium mb-1">
+                {{ product.color }}
+              </span>
+
+                            <span class="text-600 font-medium mb-2">
+                ${{ 20 }}
+              </span>
+
+                            <span class="bg-blue-50 text-blue-400 border-round inline-flex py-1 px-2 text-sm">
+                {{ product.color }}
+              </span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-content-between pt-4">
+                        <button
+                            pButton
+                            pRipple
+                            label="View"
+                            icon="pi pi-search"
+                            class="p-button-outlined p-button-secondary w-6 mr-2"
+                        ></button>
+
+                        <button
+                            pButton
+                            pRipple
+                            label="Follow"
+                            icon="pi pi-user-plus"
+                            class="p-button-outlined p-button-secondary w-6 ml-2"
+                        ></button>
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+</div>
+
+    <div class="grid">
+        <div class="col-12 sm:col-6 lg:col-3 p-3"
+             *ngFor="let product of products2">
+
+            <div class="card border-3 border-orange-100 border-round-2xl
+            transition-all transition-duration-300 ease-out
+            hover:border-orange-400
+            hover:bg-orange-50
+            hover:shadow-4
+            hover:scale-105">
+
+                <div class="flex align-items-center justify-content-between relative p-3">
+                    <div class="image-wrapper">
+                        <img  [src]="product.image"
+                            class="product-img"
+                            style="width: 90px; height: 90px"  alt=""/>
+                    </div>
+
+                    <div>
+                        <!-- sağ üst icon -->
+                        <button
+                            type="button"
+                            pRipple
+                            class="p-link w-3rem h-3rem
+         surface-0
+         border-circle
+         border-2 border-transparent
+         shadow-3
+         inline-flex align-items-center justify-content-center
+         absolute
+         transition-all transition-duration-300
+         hover:border-orange-300
+         active:border-orange-500
+         focus-visible:border-orange-500"
+                            style="top: -0.5rem; right: -0.2rem">
+
+                            <i class="pi pi-shopping-cart
+            text-orange-500
+            text-2xl
+            transition-colors transition-duration-200
+            hover:text-green-600">
+                            </i>
+                        </button>
+
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+

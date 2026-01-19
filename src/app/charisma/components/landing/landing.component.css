@@ -1,0 +1,10 @@
+p-button.p-button-sm1 {
+    font-size: 1.0rem;
+    padding: 0.4375rem 0.65625rem;
+}
+.p-time-colour {
+    color: #1b1b1c;
+    background: #ffc107;
+    border: 1px solid #ffc107;
+
+}

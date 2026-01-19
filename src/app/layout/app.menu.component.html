@@ -1,0 +1,57 @@
+
+
+<div class="left-fixed-nav menu-container h-full flex flex-column bg-yellow-50" >
+    <!-- SEARCH -->
+    <div class="my-3 p-3">
+        <span class="p-input-icon-left w-full">
+            <i class="pi pi-search text-orange-200"></i>
+            <input type="text" pInputText
+                   class="appearance-none border-none
+                          bg-orange-600 text-orange-100
+                          w-full placeholder:text-orange-300">
+        </span>
+    </div>
+
+    <!-- MENU -->
+    <div class="overflow-y-auto">
+        <ul class="list-none p-3 m-0 flex flex-wrap">
+            <ng-container *ngFor="let item of permissionMenu; let i = index">
+                <li *ngIf="!item.separator"
+                    class="w-6 text-center"
+                    [ngClass]="{ 'mt-3': i >= 2 }">
+
+                    <a pRipple
+                       class="cursor-pointer inline-flex align-items-center justify-content-center
+                              border-2 border-orange-400
+                              hover:bg-orange-200 active:bg-orange-800
+                              text-orange-300 hover:text-orange-100
+                              transition-colors transition-duration-150"
+                       style="width:60px;height:60px;border-radius:12px"
+                       (click)="onMenuClick(item)"
+                       [routerLink]="item.routerLink">
+
+                        <!-- PrimeIcon -->
+                        <i *ngIf="item.icon"
+                           class="pi {{item.icon}} text-2xl"></i>
+
+                        <!-- Image icon -->
+                        <img *ngIf="item.icon"
+                             [src]="'assets/layout/images/flatiron/' + item.icon"
+                             alt="{{item.label}}"
+                             style="width: 30px; height: 30px" />
+
+                    </a>
+
+                    <div class="mt-2 text-orange-300 font-medium text-sm">
+                        {{item.label}}
+                    </div>
+
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+
+    <!-- FOOTER -->
+</div>
+
+

@@ -1,0 +1,216 @@
+/* =============================
+   0) GLOBAL FIX (Siyah boşluk çözümü)
+   ============================= */
+
+/* Sayfanın tamamı beyaz olsun, altta siyah alan görünmesin */
+html, body {
+    height: 100%;
+    margin: 0;
+    background: #fff;
+}
+
+/* Avalon layout genelde bunları kullanır: wrapper + content */
+.layout-wrapper {
+    min-height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* İçerik alanını esnet -> footer aşağı insin, boşluk kalmasın */
+.layout-content,
+.layout-main,
+.layout-main-container,
+.layout-container,
+.layout-content-wrapper {
+    flex: 1;
+    min-height: 0;          /* önemli: flex taşmalarını düzeltir */
+    background: #fff;
+}
+
+/* Bazı temalarda ana container şeffaf kalabiliyor */
+.p-component,
+.surface-overlay,
+.surface-ground,
+.surface-section {
+    background-color: inherit;
+}
+
+/* Footer varsa ve altta siyah görünüyor olabilir */
+.layout-footer {
+    background: #fff;
+}
+
+/* =============================
+   1) TOPBAR (Sticky / Fixed kararın)
+   ============================= */
+
+/* Sticky istiyorsan (önerilen): */
+.layout-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 3000;
+
+    background: rgba(255, 237, 213, 0.92);
+    border-bottom: 1px solid rgba(251, 146, 60, 0.35);
+    backdrop-filter: blur(6px);
+}
+
+/* Icon ve yazılar */
+.layout-topbar,
+.layout-topbar a,
+.layout-topbar i {
+    color: #7c2d12;
+}
+
+/* Hover */
+.layout-topbar a:hover {
+    background-color: rgba(251, 146, 60, 0.12);
+}
+
+/* NOT: Sticky kullandığımız için body padding-top gerekmez */
+body {
+    padding-top: 0;
+}
+
+/* Eğer illa fixed istiyorsan:
+   - yukarıdaki position: sticky satırını sil
+   - aşağıdaki bloğu aç
+*/
+/*
+.layout-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3000;
+  background: rgba(255, 237, 213, 0.92);
+  border-bottom: 1px solid rgba(251, 146, 60, 0.35);
+  backdrop-filter: blur(6px);
+}
+body { padding-top: 80px; }  // topbar yüksekliğine göre
+*/
+
+
+/* =============================
+   2) LOGO SLIDER
+   ============================= */
+
+.logo-slider {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 1.5rem;
+    background: #fff; /* boşluklar beyaz kalsın */
+}
+
+.logo-track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: moveRight 30s linear infinite;
+    will-change: transform;
+}
+
+.logo-track img {
+    height: 48px;
+    object-fit: contain;
+    opacity: 0.85;
+}
+
+.logo-slider:hover .logo-track {
+    animation-play-state: paused;
+}
+
+@keyframes moveRight {
+    from { transform: translateX(0); }
+    to   { transform: translateX(50%); }
+}
+
+
+/* =============================
+   3) PRODUCT MARQUEE (FRAME + FADE)
+   ============================= */
+
+.product-marquee {
+    position: relative;
+    overflow: hidden;
+
+    /* Daha temiz hizalama: sağ/sol margin ile oynama yerine container içi padding */
+    width: 100%;
+    margin: 0;                 /* eski margin-left/right sorun çıkarabiliyor */
+    padding: 1.25rem 0;
+
+    border: 1px solid var(--surface-border, #e5e7eb);
+    border-radius: 16px;
+
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.85),
+        rgba(255,255,255,0.95)
+    );
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.04),
+        inset 0 0 0 1px rgba(255,255,255,0.6);
+}
+
+/* Kenarlarda fade */
+.product-marquee::before,
+.product-marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 72px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.product-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.product-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+/* Track */
+.product-track {
+    display: flex;
+    width: max-content;
+    align-items: stretch;
+    will-change: transform;
+    animation: marquee-left 60s linear infinite;
+}
+
+.product-marquee:hover .product-track {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* Item */
+.product-item {
+    flex: 0 0 auto;
+    width: 260px;
+    margin-right: 24px;
+    padding: 0 0.5rem;
+}
+
+/* Kart */
+.product-card {
+    border: 1px solid var(--surface-d, #e5e7eb);
+    border-radius: 12px;
+    background: #fff;
+}
+
+/* Hareket azaltma */
+@media (prefers-reduced-motion: reduce) {
+    .product-track { animation: none; }
+    .logo-track { animation: none; }
+}

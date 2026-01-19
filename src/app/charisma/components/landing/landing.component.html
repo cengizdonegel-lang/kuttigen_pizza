@@ -1,0 +1,373 @@
+<div>
+    <div class="bg-cover bg-no-repeat bg-bottom py-6 px-3 md:px-6 relative"
+         style="background: url(assets/layout/images/landing/landin-main.jpeg)">
+
+        <div
+            class="w-full h-full absolute z-0"></div>
+        <div class="my-0 mx-auto w-full z-2 relative" style="max-width: 1200px ">
+            <div class="flex flex-column gap-5 lg:flex-row justify-content-between">
+                <div class="flex justify-content-center lg:justify-content-start align-items-center gap-4">
+                    <ul class="list-none flex gap-6 p-0 m-0">
+                        <a href="#" class="text-white cursor-pointer  transition-duration-200 hover:text-primary-100">
+                            <li>Home</li>
+                        </a>
+                        <a (click)="scrollToElement(features)"
+                           class="text-white cursor-pointer transition-duration-200 hover:text-primary-100">
+                            <li>Features</li>
+                        </a>
+                        <a (click)="scrollToElement(events)"
+                           class="text-white cursor-pointer  transition-duration-200 hover:text-primary-100">
+                            <li>Events</li>
+                        </a>
+                        <a (click)="scrollToElement(pricing)"
+                           class="text-white cursor-pointer  transition-duration-200 hover:text-primary-100">
+                            <li>Pricing</li>
+                        </a>
+                        <a (click)="scrollToElement(video)"
+                           class="text-white cursor-pointer  transition-duration-200 hover:text-primary-100">
+                            <li>Video</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="flex justify-content-center lg:justify-content-end align-items-center gap-3">
+                    <button pButton pRipple label="Login"
+                            class="w-8rem p-button-outlined text-white hover:text-gray-700 transition-duration-200 hover:bg-white"></button>
+                    <button pButton pRipple label="Register"
+                            class="w-8rem p-button-outlined text-white hover:text-gray-700  transition-duration-200 hover:bg-white"></button>
+                </div>
+            </div>
+            <div class="flex flex-column align-items-center gap-5 mt-6 pt-0 ">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86"
+                     height="86" viewBox="0 0 86 86">
+                    <defs>
+                        <linearGradient id="b" x1="50%" x2="50%" y1="-66.708%" y2="100%">
+                            <stop offset="0%" stop-color="var(--primary-400)"/>
+                            <stop offset="100%" stop-color="var(--primary-700)"/>
+                        </linearGradient>
+                        <circle id="f" cx="43" cy="43" r="43"/>
+                        <path id="d"
+                              d="M66.29 12.931L56.14 0 43.17 10.353l-8.939-8.036-8.955 9.04-5.233-1.237L3.49 29.463H0v14.333h86.796V29.463h-2.49L69.427 11.97l-3.136.961z"/>
+                    </defs>
+                    <g fill="none" fill-rule="evenodd">
+                        <mask id="c" fill="#fff">
+                            <use xlink:href="#f"/>
+                        </mask>
+                        <use fill="url(#b)" xlink:href="#f"/>
+                        <g fill="#FFF" fill-rule="nonzero" mask="url(#c)">
+                            <path
+                                d="M42.638 69.342c.352.001.68-.18.866-.478l4.075-6.528c.101-.163.155-.35.155-.542l-.073-36.195 4.088.008a1.018 1.018 0 0 0 1.02-1.02l-.006-3.065a1.026 1.026 0 0 0-1.024-1.024l-6.133-.013-.022-11.604A4.052 4.052 0 0 0 46.6 6.18a4.081 4.081 0 0 0-1.203-2.893 4.081 4.081 0 0 0-2.893-1.204 4.045 4.045 0 0 0-2.889 1.191 4.045 4.045 0 0 0-1.191 2.89 4.084 4.084 0 0 0 1.027 2.701l.013 6.498.001.001.008 4.087.001 1.02-6.132-.01a1.018 1.018 0 0 0-1.02 1.02l.007 3.065c0 .565.46 1.024 1.024 1.024l4.088.01.072 36.194c0 .19.055.38.157.542l4.102 6.543c.186.301.515.482.866.483zm-1.13-53.552l2.04-2.04.003 1.198-2.04 2.04-.002-1.198zm1.012-5.53c.35 0 .693-.043 1.022-.127l.001.727-2.04 2.04-.005-2.772c.327.085.67.13 1.022.132zm-2.052-4.092a2.022 2.022 0 0 1 .596-1.445 2.023 2.023 0 0 1 1.444-.595c.545 0 1.06.214 1.447.6.387.388.599.901.6 1.447.002.546-.21 1.06-.595 1.444a2.022 2.022 0 0 1-1.444.596 2.054 2.054 0 0 1-2.048-2.047zm1.05 13.711l2.04-2.04.005 2.643-2.045-.005v-.598zm-7.15 2.627l6.133.013 10.22.02.002 1.023-4.088-.009-8.176-.016-4.089-.009-.002-1.022zm5.188 38.979l-.072-35.902 2.045.005.05 25.161c.001.564.46 1.022 1.023 1.024.566 0 1.023-.457 1.021-1.02l-.05-25.162 2.043.004.072 35.903-3.056 4.895-3.076-4.908z"/>
+                            <path
+                                d="M43.237 6.896a1.022 1.022 0 0 0-.004-1.446c-.4-.4-1.047-.402-1.445-.003a1.023 1.023 0 0 0 .003 1.446c.4.4 1.047.401 1.446.003z"/>
+                        </g>
+                        <g mask="url(#c)">
+                            <g transform="translate(-.796 44.687)">
+                                <mask id="e" fill="#fff">
+                                    <use xlink:href="#d"/>
+                                </mask>
+                                <use fill="#FFF" xlink:href="#d"/>
+                                <path fill="#F1E1E6"
+                                      d="M49.358 5.645L52.5 8.078l2.59-2.115 2.186 1.642 1.857-1.642 2.453.613-5.156-6.609zM25.496 11.277l4.572-1.625 2.616 2.788 3.203-2.97 2.98 1.964L41.58 8.62l-7.082-6.393z"
+                                      mask="url(#e)"/>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+                <span class="text-white text-4xl"> Sanachoice</span>
+                <span class="text-white text-2xl text-center line-height-3">GEWINNEN IM WERT VON 500 CHF</span>
+                <button pButton pRipple label="JEZST TEILNEHMEN"
+                        class="p-button.p-button-sm1"></button>
+            </div>
+        </div>
+    </div>
+
+    <div #features id="features" class="flex justify-content-center py-6 px-3 lg:px-6 w-full">
+        <div class="grid  justify-content-center w-full" style="max-width: 1200px">
+
+                <div class="grid mt-7">
+                    <div class="col-12 md:col-4">
+                        <div class="shadow-1 p-5 surface-card text-center border-round">
+                            <div class="border-circle bg-blue-50 p-4 text-blue-600 inline-flex justify-content-center align-items-center mb-4">
+                                <i class="pi pi-heart text-5xl "></i>
+                            </div>
+                            <div class="text-900 font-medium text-2xl mb-4">Gewinnen</div>
+                            <div class="text-700 mb-4 line-height-3">Ende Juli 2023 wird offiziell ein/e Gewinner/in ausgelost und offiziell publiziert.</div>
+                            <button pButton pRipple label="Learn More" class="p-button-text font-bold"></button>
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-4">
+                        <div class="shadow-1 p-5 surface-card text-center border-round">
+                            <div class="border-circle bg-purple-50 p-4 text-purple-600 inline-flex justify-content-center align-items-center mb-4">
+                                <i class="pi pi-wifi text-5xl"></i>
+                            </div>
+                            <div class="text-900 font-medium text-2xl mb-4">Formular ausfüllen</div>
+                            <div class="text-700 mb-4 line-height-3"> Füllen Sie unten das Kontaktformular.
+
+                            </div>
+                            <button pButton pRipple label="Learn More" class="p-button-text font-bold"></button>
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-4">
+                        <div class="shadow-1 p-5 surface-card text-center border-round">
+                            <div class="border-circle bg-orange-50 p-4 text-orange-600 inline-flex justify-content-center align-items-center mb-4">
+                                <i class="pi pi-lock text-5xl"></i>
+                            </div>
+                            <div class="text-900 font-medium text-2xl mb-4"> Abwarten</div>
+                            <div class="text-700 mb-4 line-height-3">Sie werden per Mail benachrichtigt ob Sie gewonnen haben oder nicht..</div>
+                            <button pButton pRipple label="Learn More" class="p-button-text font-bold"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    <!-- -->
+    <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+        <div class="grid">
+            <div class="col-12 md:col-6 flex align-items-center">
+                <div>
+                    <div class="text-900 text-4xl font-bold mb-6">Was bestehende Kunden über uns sagen</div>
+
+                    <div class="grid">
+                        <div class="col-12 md:col-6">
+                            <div class="text-900 font-medium mb-2">Arina Balkova
+                            </div>
+                            <div class="text-700 mb-3 line-height-3">“Ich mochte den Service und die Fürsorge des Managers, wir konnten genau das finden, wonach ich suchte. Sehr zu empfehlen”.</div>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <div class="text-900 font-medium mb-2">Seraina Gerster</div>
+                            <div class="text-700 mb-3 line-height-3">“Zuverlässig, schnell und kompetent. So habe ich das Team kennengelernt.”</div>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <div class="text-900 font-medium mb-2">Dominik Frei</div>
+                            <div class="text-700 mb-3 line-height-3">“Ich konnte durch kleine Optimierungen 1000 CHF im Jahr einsparen.”</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6">
+                <img src="assets/charisma/images/blog/blog-1.png" alt="Image" class="w-full">
+            </div>
+        </div>
+    </div>
+
+    <div #events id="events"
+         class=" flex justify-content-center surface-card py-6 w-full bg-cover bg-no-repeat bg-bottom py-6 px-3 lg:px-6 relative"
+    >
+
+
+        <div class="grid w-full justify-content-center relative z-2" style="max-width: 1200px;">
+            <div class="col-12 md:col-4">
+                <div class=" p-5 border-round h-full" style="background-color:rgba(214, 51, 132,0.8);">
+                    <img src="assets/layout/images/landing/icon-ui.svg" class="mb-3"/>
+                    <p class="text-white  m-0 mb-2 font-semibold text-lg">UI Components</p>
+                    <p class="text-white m-0 font-semibold text-lg">100+</p>
+                </div>
+            </div>
+            <div class="col-12 md:col-4">
+                <div class=" p-5 border-round  h-full" style="background-color:rgba(13, 110, 253,0.8);">
+                    <img src="assets/layout/images/landing/icon-hours.svg" class="mb-3"/>
+                    <p class="text-white m-0 mb-2 font-semibold text-lg">Hours of Development</p>
+                    <p class="text-white m-0 font-semibold text-lg">425</p>
+                </div>
+            </div>
+            <div class="col-12 md:col-4">
+                <div class=" p-5 border-round h-full" style="background-color:rgba(102, 16, 242,0.8);">
+                    <img src="assets/layout/images/landing/icon-coffee.svg" class="mb-3"/>
+                    <p class="text-white  m-0 mb-2 font-semibold text-lg">Cups of Coffee Consumed</p>
+                    <p class="text-white m-0 font-semibold text-lg">129</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div #pricing id="pricing" class="flex justify-content-center py-6 w-full px-3 lg:px-6">
+        <div class="grid justify-content-center w-full" style="max-width: 1200px;">
+            <div class="col-12 lg:col-4">
+                <div class="border-1 surface-border surface-card h-full text-color border-round">
+                    <div class="p-5 border-bottom-1 surface-border">
+                        <h3 class="text-xl m-0 mb-1 text-800">Beginner</h3>
+                        <span class="text-600 ">For starters and side projects</span>
+                        <p class="text-color-secondary mt-2  font-medium">$10 / per year</p>
+                    </div>
+                    <div>
+                        <ul class="p-0 mt-0" style="min-height: 175px;">
+                            <li class="list-none px-5 py-2 border-bottom-1 surface-border"><span
+                                class="text-color-secondary">Responsive</span></li>
+                            <li class="list-none px-5 py-2 border-bottom-1 surface-border"><span
+                                class="text-color-secondary">Push Messages</span></li>
+                        </ul>
+                    </div>
+                    <div class="py-5 px-5">
+                        <button pButton pRipple class="flex justify-content-center w-full">Get Started</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 lg:col-4">
+                <div class="border-1 surface-border surface-card h-full text-color border-round">
+                    <div class="p-5 border-bottom-1 surface-border">
+                        <h3 class="text-xl m-0 mb-1 text-800">Professional</h3>
+                        <span class="text-600  ">For starters and side projects</span>
+                        <p class="text-color-secondary font-medium  mt-2">$25 / per year</p>
+                    </div>
+                    <div>
+                        <ul class="p-0 mt-0" style="min-height: 175px;">
+                            <li class="list-none px-5 py-2 border-bottom-1 surface-border"><span
+                                class="text-color-secondary">Responsive</span></li>
+                            <li class="list-none px-5 py-2 border-bottom-1 surface-border"><span
+                                class="text-color-secondary">Push Messages</span></li>
+                            <li class="list-none px-5 py-2 border-bottom-1 surface-border"><span
+                                class="text-color-secondary">7/24 Support</span></li>
+                        </ul>
+                    </div>
+                    <div class="py-5 px-5">
+                        <button pButton pRipple class="flex justify-content-center w-full">Get Started</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 lg:col-4">
+                <div class="border-1 surface-border surface-card h-full text-color border-round">
+                    <div class="p-5 border-bottom-1 surface-border">
+                        <h3 class="text-xl m-0 mb-1 text-800">Enterprise</h3>
+                        <span class="text-600">For starters and side projects</span>
+                        <p class="text-color-secondary mt-2  font-medium">Get a quote</p>
+                    </div>
+                    <div>
+                        <ul class="p-0 mt-0" style="min-height: 175px;">
+                            <li class="list-none px-5 py-2 border-bottom-1 surface-border"><span
+                                class="text-color-secondary">Responsive</span></li>
+                            <li class="list-none px-5 py-2 border-bottom-1 surface-border"><span
+                                class="text-color-secondary">Push Messages</span></li>
+                            <li class="list-none px-5 py-2 border-bottom-1 surface-border"><span
+                                class="text-color-secondary">7/24 High Priority Support</span></li>
+                            <li class="list-none px-5 py-2 border-bottom-1 surface-border"><span
+                                class="text-color-secondary">Free Shipping</span></li>
+                        </ul>
+                    </div>
+                    <div class="py-5 px-5">
+                        <button pButton pRipple class="flex justify-content-center w-full">Get a Quote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div #video id="video"
+         class=" flex justify-content-center py-6 w-full bg-cover bg-no-repeat bg-bottom py-6 px-3 lg:px-6 relative"
+    >
+        <div
+            style=" background:linear-gradient(0deg, var(--primary-700) , var(--primary-500)); opacity: .8;top: 0;left: 0;"
+            class="w-full h-full absolute z-0"></div>
+
+        <div class="grid grid-nogutter align-items-center justify-content-center relative z-2 px-3 lg:px-6"
+             style="max-width: 1200px;">
+            <div class="col-12 lg:col-6 text-center mb-5">
+
+                <iframe class="w-full md:w-40rem" height="300" src="https://www.youtube.com/watch?v=O5tf_tSCqdc"
+                        frameborder="0"
+                        allowfullscreen="true"></iframe>
+            </div>
+            <div class="col-12 lg:col-6 text-center mb-5 lg:text-right">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="mb-3 w-6rem"
+                     viewBox="0 0 92 92">
+                    <defs>
+                        <rect id="j" width="56.075" height="56.075" x="11.613" y="11.613" rx="4"/>
+                        <filter id="v" width="142.8%" height="142.8%" x="-21.4%" y="-21.4%"
+                                filterUnits="objectBoundingBox">
+                            <feOffset in="SourceAlpha" result="shadowOffsetOuter1"/>
+                            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+                            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                        </filter>
+                    </defs>
+                    <g fill="none" fill-rule="evenodd">
+                        <g transform="rotate(45 35.408 49.893)">
+                            <use fill="#000" filter="url(#v)" xlink:href="#b"/>
+                            <use fill="var(--surface-card)" xlink:href="#j"/>
+                        </g>
+                        <path fill="var(--primary-500)" fill-rule="nonzero"
+                              d="M45.508 32H32.154c-.677 0-1.23.554-1.23 1.23v3.693H27.23c-.677 0-1.231.554-1.231 1.23v19.878c0 .677.554 1.23 1.23 1.23h27.508c.677 0 1.231-.553 1.231-1.23v-4l6.216 4c.43.246.861.369 1.353.369.431 0 .8-.123 1.17-.308.8-.43 1.292-1.292 1.292-2.215v-15.57c0-.922-.492-1.784-1.292-2.215-.8-.43-1.723-.369-2.523.123l-6.216 4v-4c0-.677-.554-1.23-1.23-1.23h-8v-3.693c0-.738-.554-1.292-1.231-1.292zm-12.123 2.462h10.892v2.461H33.385v-2.461zm30.153 5.784V56l-7.569-4.862v-6.03l7.57-4.862zm-10.03 16.616H28.462V39.385h25.046v17.477z"/>
+                    </g>
+                </svg>
+
+                <h2 class="text-white m-0 mb-2 ">Gründlich, kompetent und sympathisch</h2>
+                <p class="text-white m-0 mb-4" style="line-height: 1.5;">Unser Ziel ist es, Ihnen eine kompetente und sichere Beratung zu bieten, damit Sie sich in allen Lebenslagen gut um sich selbst, Ihre Familie und Ihre Gesundheit kümmern können. </p>
+                <button pButton pRipple>Learn More</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex align-items-center justify-content-center py-5" style="background-color: #292b2c;">
+        <div class="grid w-full" style="max-width: 1200px;">
+<!--            <div class="col-12 lg:col-6 ">-->
+<!--                <img src="assets/layout/images/landing/avalon.png"/>-->
+<!--            </div>-->
+            <div class="col-12 lg:col-6">
+                <ul class="list-none m-0  text-center p-0">
+                    <div class="grid">
+                        <div class="col-12 lg:col-6 text-center">
+                            <li class="block text-lg text-left pb-2">
+                                <a class="text-white border-bottom-1 border-transparent hover:border-white"
+                                   href="/">Home</a>
+                            </li>
+                            <li class="block text-lg text-left pb-2">
+                                <a class="text-white border-bottom-1 border-transparent hover:border-white"
+                                   href="/#/landing#features">Features</a>
+                            </li>
+                            <li class="block text-lg text-left pb-2">
+                                <a class="text-white border-bottom-1 border-transparent hover:border-white"
+                                   href="/#/landing#events">Events</a>
+                            </li>
+                        </div>
+                        <div class="col-12 lg:col-6 text-center ">
+                            <li class="block text-lg text-left pb-2">
+                                <a class="text-white border-bottom-1 border-transparent hover:border-white"
+                                   href="/#/landing#pricing">Pricing</a>
+                            </li>
+                            <li class="block text-lg text-left pb-2">
+                                <a class="text-white border-bottom-1 border-transparent hover:border-white"
+                                   href="/#/landing#video">Video</a>
+                            </li>
+                        </div>
+
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+        <div class="flex flex-wrap">
+            <div class="flex md:col-6 xl:col-3 align-items-center flex-auto p-5 border-left-2 xl:border-left-none xl:border-top-2 border-pink-500">
+                <i class="pi pi-arrow-right text-pink-500 text-4xl mr-5"></i>
+                <div>
+                    <span class="text-900 font-medium text-xl">Pay Later in 30 Days</span>
+                    <p class="text-600 line-height-3 p-0 mt-3 mb-0">Ullamcorper sit amet risus nullam eget felis eget nunc.</p>
+                </div>
+            </div>
+            <div class="flex md:col-6 xl:col-3 align-items-center flex-auto p-5 border-left-2 xl:border-left-none xl:border-top-2 border-blue-500">
+                <i class="pi pi-shopping-cart text-blue-500 text-4xl mr-5"></i>
+                <div>
+                    <span class="text-900 font-medium text-xl">Free Shipping</span>
+                    <p class="text-600 line-height-3 p-0 mt-3 mb-0">Ullamcorper sit amet risus nullam eget felis eget nunc.</p>
+                </div>
+            </div>
+            <div class="flex md:col-6 xl:col-3 align-items-center flex-auto p-5 border-left-2 xl:border-left-none xl:border-top-2 border-orange-500">
+                <i class="pi pi-shield text-orange-500 text-4xl mr-5"></i>
+                <div>
+                    <span class="text-900 font-medium text-xl">Secure Payment</span>
+                    <p class="text-600 line-height-3 p-0 mt-3 mb-0">Ullamcorper sit amet risus nullam eget felis eget nunc.</p>
+                </div>
+            </div>
+            <div class="flex md:col-6 xl:col-3 align-items-center flex-auto p-5 border-left-2 xl:border-left-none xl:border-top-2 border-cyan-500">
+                <i class="pi pi-refresh text-cyan-500 text-4xl mr-5"></i>
+                <div>
+                    <span class="text-900 font-medium text-xl">Money Back Guarantee</span>
+                    <p class="text-600 line-height-3 p-0 mt-3 mb-0">Ullamcorper sit amet risus nullam eget felis eget nunc.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-config [minimal]="true"></app-config>

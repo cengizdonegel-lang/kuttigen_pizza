@@ -1,0 +1,158 @@
+.logo-slider {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+.product-card {
+    border: 1px solid var(--surface-d);
+}
+.product-marquee{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Track: tek satır akacak */
+.product-track{
+    display: flex;
+    width: max-content;
+    align-items: stretch;
+    animation: marquee-left 60s linear infinite; /* 60s = yavaş */
+    will-change: transform;
+}
+
+/* Her bir ürün kutusu */
+.product-item{
+    flex: 0 0 auto;
+    width: 260px;           /* kart genişliği (isteğe göre) */
+    margin-right: 24px;     /* aralık */
+}
+
+/* border’ı inline yerine buraya al */
+.product-card{
+    border: 1px solid var(--surface-d);
+}
+
+/* Sürekli sola akış (sağa istiyorsan altta yazdım) */
+@keyframes marquee-left{
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); } /* kopya set yüzünden -50% yeter */
+}
+
+/* Hover olunca dursun istersen */
+.product-marquee:hover .product-track{
+    animation-play-state: paused;
+}
+
+/* Hareket azaltma tercihine saygı */
+@media (prefers-reduced-motion: reduce){
+    .product-track{ animation: none; }
+}
+@keyframes marquee-right{
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+}
+
+.product-marquee::before,
+.product-marquee::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Sol fade */
+.product-marquee::before{
+    left: 0;
+    background: linear-gradient(
+        to right,
+        rgba(255,255,255,1),
+        rgba(255,255,255,0)
+    );
+}
+
+/* Sağ fade */
+.product-marquee::after{
+    right: 0;
+    background: linear-gradient(
+        to left,
+        rgba(255,255,255,1),
+        rgba(255,255,255,0)
+    );
+}
+.product-track{
+    display: flex;
+    width: max-content;
+    align-items: stretch;
+    animation: marquee-left 80s linear infinite;
+    will-change: transform;
+}
+
+/* Kartlar çerçeveye yapışmasın */
+.product-item{
+    padding: 0 0.5rem;
+}
+
+/* Kart görünümü biraz daha soft */
+.product-card{
+    border: 1px solid var(--surface-d);
+    border-radius: 12px;
+    background: #fff;
+}
+.product-marquee{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    /* ÇERÇEVE */
+    border: 1px solid var(--surface-border, #e5e7eb);
+    border-radius: 16px;
+
+    /* İç boşluk */
+    padding: 1.25rem 0;
+
+    /* Hafif arka plan */
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.85),
+        rgba(255,255,255,0.95)
+    );
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.04),
+        inset 0 0 0 1px rgba(255,255,255,0.6);
+}
+
+
+.p-carousel-item {
+    transition: transform 0.8s ease-in-out;
+}
+.logo-track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: moveRight 30s linear infinite;
+}
+
+.logo-track img {
+    height: 48px;
+    object-fit: contain;
+    opacity: 0.85;
+}
+.logo-slider:hover .logo-track {
+    animation-play-state: paused;
+}
+
+
+/* Sağ tarafa doğru yavaş akış */
+@keyframes moveRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(50%);
+    }
+}
