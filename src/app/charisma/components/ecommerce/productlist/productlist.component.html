@@ -23,10 +23,23 @@
 	Canlı arka planı başlat
 </button>
 
-<div class="productlist-container">
+<div class="productlist-container" [class.marquee-hidden]="isMarqueeCollapsed">
 
-<div class="product-marquee">
-    <div class="product-track">
+<div
+    class="product-marquee-shell"
+    [style.--marquee-h]="marqueeHeight"
+    [style.--marquee-visible-h]="marqueeVisibleHeight"
+>
+    <div
+        #productMarquee
+        class="product-marquee"
+        [style.opacity]="marqueeOpacity"
+        [style.transform]="marqueeTransform"
+        [style.filter]="marqueeFilter"
+        [style.visibility]="marqueeVisibility"
+        [style.pointer-events]="marqueePointerEvents"
+    >
+        <div class="product-track">
 
         <ng-container *ngFor="let product of products2">
             <div class="product-item">
@@ -139,6 +152,7 @@
             </div>
         </ng-container>
 
+        </div>
     </div>
 </div>
 

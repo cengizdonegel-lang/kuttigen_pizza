@@ -9,11 +9,45 @@ export class ProductListComponent implements AfterViewInit, OnDestroy{
 
     @ViewChild('carousel') carousel!: Carousel;
     @ViewChild('bgVideo') bgVideo?: ElementRef<HTMLVideoElement>;
+    @ViewChild('productMarquee') productMarquee?: ElementRef<HTMLElement>;
 
     @HostBinding('class.video-playing')
     isVideoPlaying = false;
 
     private cleanupFns: Array<() => void> = [];
+
+    marqueeHeight = '0px';
+    isMarqueeCollapsed = false;
+
+    marqueeVisibleHeight = '0px';
+    marqueeOpacity = 1;
+    marqueeTransform = 'translate3d(0, 0, 0)';
+    marqueeFilter = 'none';
+    marqueePointerEvents: 'auto' | 'none' = 'auto';
+    marqueeVisibility: 'visible' | 'hidden' = 'visible';
+
+    private marqueeHeightPx = 0;
+
+    private readonly marqueeBehavior = {
+        // Keep marquee fully visible close to the top.
+        alwaysShowAtTopPx: 8,
+
+        // Start collapsing only after scrolling past this fraction of marquee height.
+        startAfterMultiplier: 0.55,
+
+        // Collapse over a wider distance (multiplied by marquee height).
+        collapseRangeMultiplier: 1.8,
+
+        // How quickly it should *look* like it disappears after collapsing starts
+        // (fraction of marquee height after which opacity becomes ~0).
+        fadeWindowMultiplier: 0.25,
+
+        // Visual exit styling while collapsing.
+        exitTranslateYPx: 14,
+        exitBlurPx: 1.4
+    } as const;
+
+    private lastScrollY = 0;
 
 
     private intervalId: any;
@@ -33,6 +67,103 @@ export class ProductListComponent implements AfterViewInit, OnDestroy{
         }, 1000);
 
         this.setupBackgroundVideoAutoplay();
+
+        this.setupMarqueeAutoHide();
+    }
+
+    private setupMarqueeAutoHide() {
+        const marqueeEl = this.productMarquee?.nativeElement;
+        if (!marqueeEl) return;
+
+        // In this layout, the scroll container is usually `.layout-content` (not window).
+        const scrollEl = (marqueeEl.closest('.layout-content') as HTMLElement | null)
+            ?? (document.querySelector('.layout-content') as HTMLElement | null);
+
+        const updateHeight = () => {
+            // offsetHeight is stable and includes padding/borders.
+            this.marqueeHeightPx = marqueeEl.offsetHeight;
+            this.marqueeHeight = `${this.marqueeHeightPx}px`;
+        };
+
+        updateHeight();
+
+        // Keep height in sync (responsive / font loading).
+        const win = marqueeEl.ownerDocument?.defaultView;
+        const ResizeObs: any = win && (win as any).ResizeObserver;
+        if (ResizeObs) {
+            const ro: ResizeObserver = new ResizeObs(() => updateHeight());
+            ro.observe(marqueeEl);
+            this.cleanupFns.push(() => ro.disconnect());
+        } else {
+            const onResize = () => updateHeight();
+            window.addEventListener('resize', onResize, { passive: true });
+            this.cleanupFns.push(() => window.removeEventListener('resize', onResize));
+        }
+
+        const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+        const smoothstep = (t: number) => t * t * (3 - 2 * t);
+        const getScrollTop = () => (scrollEl ? scrollEl.scrollTop : (window.scrollY || 0));
+        this.lastScrollY = getScrollTop();
+        let ticking = false;
+
+        const applyMarqueeByScrollTop = (y: number) => {
+            // Don't collapse right at the top.
+            const effectiveY = Math.max(0, y - this.marqueeBehavior.alwaysShowAtTopPx);
+
+            // Collapse over a wider distance so cards move more gradually.
+            const rangePx = Math.max(1, this.marqueeHeightPx * this.marqueeBehavior.collapseRangeMultiplier);
+
+            // Start collapsing only after the user has scrolled past > half of the marquee height.
+            const startPx = this.marqueeHeightPx * this.marqueeBehavior.startAfterMultiplier;
+            const progress = clamp01((effectiveY - startPx) / Math.max(1, rangePx - startPx));
+
+            // Ease so it feels more natural and clearly "disappears".
+            const eased = smoothstep(progress);
+
+            const visibleHeightPx = Math.max(0, Math.round((1 - eased) * this.marqueeHeightPx));
+            this.marqueeVisibleHeight = `${visibleHeightPx}px`;
+
+            // Fade/slide out as it collapses.
+            // Make it *visually* disappear shortly after collapse begins,
+            // while height continues to collapse gradually with scroll.
+            const fadeWindowPx = Math.max(1, this.marqueeHeightPx * this.marqueeBehavior.fadeWindowMultiplier);
+            const fadeProgress = clamp01((effectiveY - startPx) / fadeWindowPx);
+            const fadeT = smoothstep(fadeProgress);
+            this.marqueeOpacity = Math.pow(1 - fadeT, 2.6);
+
+            const ty = -this.marqueeBehavior.exitTranslateYPx * eased;
+            this.marqueeTransform = `translate3d(0, ${ty}px, 0)`;
+            const blurPx = this.marqueeBehavior.exitBlurPx * fadeT;
+            this.marqueeFilter = blurPx > 0.01 ? `blur(${blurPx.toFixed(2)}px)` : 'none';
+
+            const effectivelyHidden = fadeProgress > 0.98;
+            this.marqueePointerEvents = effectivelyHidden ? 'none' : 'auto';
+            this.marqueeVisibility = effectivelyHidden ? 'hidden' : 'visible';
+
+            // Used for the centering mode when marquee is effectively gone.
+            this.isMarqueeCollapsed = progress >= 0.999;
+        };
+
+        // Initialize once we have a height.
+        applyMarqueeByScrollTop(this.lastScrollY);
+
+        const onScroll = () => {
+            if (ticking) return;
+            ticking = true;
+
+            requestAnimationFrame(() => {
+                ticking = false;
+
+                const y = getScrollTop();
+                this.lastScrollY = y;
+
+                applyMarqueeByScrollTop(y);
+            });
+        };
+
+        const target: any = scrollEl ?? window;
+        target.addEventListener('scroll', onScroll, { passive: true });
+        this.cleanupFns.push(() => target.removeEventListener('scroll', onScroll));
     }
 
     private setupBackgroundVideoAutoplay() {
@@ -113,6 +244,7 @@ export class ProductListComponent implements AfterViewInit, OnDestroy{
         if (this.intervalId) {
             clearInterval(this.intervalId);
         }
+
         for (const fn of this.cleanupFns) {
             try {
                 fn();

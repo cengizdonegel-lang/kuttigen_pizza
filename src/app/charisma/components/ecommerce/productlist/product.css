@@ -52,7 +52,7 @@
     margin: 0 auto;
     padding: 1.25rem clamp(1rem, 2.5vw, 2rem) 2rem;
     box-sizing: border-box;
-    transform: translateX(clamp(0px, 1.2vw, 24px));
+    transform: none;
 }
 
 .productlist-container .grid {
@@ -60,6 +60,11 @@
     margin-left: 0;
     margin-right: 0;
     justify-content: center;
+}
+
+/* When marquee collapses, visually center cards on the page */
+.productlist-container.marquee-hidden .grid {
+    justify-content: center !important;
 }
 
 .productlist-video-unlock {
@@ -155,6 +160,16 @@
     border: 1px solid var(--surface-d);
 }
 
+/* Marquee: smooth hide without layout jump (two-phase: fade -> collapse height) */
+.product-marquee-shell {
+    --marquee-h: 0px;
+    max-height: var(--marquee-visible-h, var(--marquee-h));
+    overflow: hidden;
+    margin: 0 auto 1.25rem;
+    will-change: max-height;
+    transition: none;
+}
+
 /* Sürekli sola akış (sağa istiyorsan altta yazdım) */
 @keyframes marquee-left{
     from { transform: translateX(0); }
@@ -239,6 +254,8 @@
     box-shadow:
         0 8px 24px rgba(0,0,0,0.10),
         inset 0 0 0 1px rgba(255,255,255,0.25);
+
+    transition: none;
 }
 
 

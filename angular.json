@@ -18,7 +18,9 @@
                   "builder": "@angular-devkit/build-angular:browser",
                   "options": {
                       "allowedCommonJsDependencies": [
-                          "lodash"
+                          "lodash",
+                          "quill",
+                          "quill-delta"
                       ],
                       "outputPath": "dist/avalon-ng",
                       "index": "src/index.html",
@@ -43,13 +45,13 @@
                           "budgets": [
                               {
                                   "type": "initial",
-                                  "maximumWarning": "1mb",
+                                  "maximumWarning": "1.5mb",
                                   "maximumError": "5mb"
                               },
                               {
                                   "type": "anyComponentStyle",
-                                  "maximumWarning": "2kb",
-                                  "maximumError": "4kb"
+                                  "maximumWarning": "5kb",
+                                  "maximumError": "10kb"
                               }
                           ],
                           "outputHashing": "all"
