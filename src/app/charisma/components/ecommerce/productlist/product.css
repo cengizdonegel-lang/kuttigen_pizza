@@ -24,6 +24,8 @@
     pointer-events: none;
 	opacity: 0.62;
 	filter: saturate(1.15) contrast(1.18) brightness(0.88);
+	transform: translateZ(0);
+	-webkit-transform: translateZ(0);
 }
 
 .productlist-bg-overlay {
@@ -36,6 +38,29 @@
         linear-gradient(180deg, rgba(15, 18, 23, 0.42) 0%, rgba(15, 18, 23, 0.58) 100%);
     backdrop-filter: blur(0.8px);
     -webkit-backdrop-filter: blur(0.8px);
+}
+
+/* If the phone blocks autoplay, keep a subtle “alive” flame shimmer anyway */
+:host:not(.video-playing) .productlist-bg-overlay {
+    animation: productlist-flame-fallback 6s ease-in-out infinite;
+}
+
+@keyframes productlist-flame-fallback {
+    0% {
+        filter: saturate(1.0) brightness(1.0);
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        filter: saturate(1.1) brightness(1.06);
+        opacity: 0.96;
+        transform: translate3d(0, -6px, 0);
+    }
+    100% {
+        filter: saturate(1.0) brightness(1.0);
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 /* Make text on top of video feel sharper */

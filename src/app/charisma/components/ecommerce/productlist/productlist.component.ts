@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostBinding, OnDestroy, ViewChild } from '@angular/core';
 import { Carousel } from 'primeng/carousel';
 
 @Component({
@@ -9,6 +8,12 @@ import { Carousel } from 'primeng/carousel';
 export class ProductListComponent implements AfterViewInit, OnDestroy{
 
     @ViewChild('carousel') carousel!: Carousel;
+    @ViewChild('bgVideo') bgVideo?: ElementRef<HTMLVideoElement>;
+
+    @HostBinding('class.video-playing')
+    isVideoPlaying = false;
+
+    private cleanupFns: Array<() => void> = [];
 
 
     private intervalId: any;
@@ -26,10 +31,75 @@ export class ProductListComponent implements AfterViewInit, OnDestroy{
             }
 
         }, 1000);
+
+        this.setupBackgroundVideoAutoplay();
+    }
+
+    private setupBackgroundVideoAutoplay() {
+        const video = this.bgVideo?.nativeElement;
+        if (!video) return;
+
+        const setPlaying = (playing: boolean) => {
+            this.isVideoPlaying = playing;
+        };
+
+        const onPlaying = () => setPlaying(true);
+        const onPause = () => setPlaying(false);
+        const onEnded = () => setPlaying(false);
+        const onError = () => setPlaying(false);
+
+        video.addEventListener('playing', onPlaying);
+        video.addEventListener('pause', onPause);
+        video.addEventListener('ended', onEnded);
+        video.addEventListener('error', onError);
+
+        this.cleanupFns.push(() => {
+            video.removeEventListener('playing', onPlaying);
+            video.removeEventListener('pause', onPause);
+            video.removeEventListener('ended', onEnded);
+            video.removeEventListener('error', onError);
+        });
+
+        const tryPlay = () => {
+            try {
+                video.muted = true;
+                video.playsInline = true;
+                (video as any).webkitPlaysInline = true;
+            } catch {
+                // ignore
+            }
+
+            const playPromise = video.play();
+            if (playPromise && typeof (playPromise as any).catch === 'function') {
+                (playPromise as Promise<void>).catch(() => {
+                    // iOS/Safari may block autoplay until user interaction
+                });
+            }
+        };
+
+        // Attempt immediately (some browsers allow muted autoplay)
+        queueMicrotask(tryPlay);
+
+        // Fallback: start playback on first user interaction
+        const unlock = () => tryPlay();
+        window.addEventListener('touchstart', unlock, { once: true, passive: true });
+        window.addEventListener('click', unlock, { once: true, passive: true });
+
+        this.cleanupFns.push(() => {
+            window.removeEventListener('touchstart', unlock);
+            window.removeEventListener('click', unlock);
+        });
     }
     ngOnDestroy() {
         if (this.intervalId) {
             clearInterval(this.intervalId);
+        }
+        for (const fn of this.cleanupFns) {
+            try {
+                fn();
+            } catch {
+                // ignore
+            }
         }
     }
     color1: string = 'Bluegray';
