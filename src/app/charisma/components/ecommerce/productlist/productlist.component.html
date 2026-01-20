@@ -23,6 +23,8 @@
 	Canlı arka planı başlat
 </button>
 
+<div class="productlist-container">
+
 <div class="product-marquee">
     <div class="product-track">
 
@@ -140,54 +142,57 @@
     </div>
 </div>
 
-    <div class="grid">
-        <div class="col-12 sm:col-6 lg:col-3 p-3"
-             *ngFor="let product of products2">
-
-            <div class="card border-3 border-orange-100 border-round-2xl
+<div class="grid">
+    <div class="col-12 sm:col-6 lg:col-3 p-3" *ngFor="let product of products2">
+        <div class="card border-3 border-orange-100 border-round-2xl
             transition-all transition-duration-300 ease-out
             hover:border-orange-400
             hover:bg-orange-50
             hover:shadow-4
             hover:scale-105">
 
-                <div class="flex align-items-center justify-content-between relative p-3">
-                    <div class="image-wrapper">
-                        <img  [src]="product.image"
-                            class="product-img"
-                            style="width: 90px; height: 90px"  alt=""/>
-                    </div>
+            <div class="flex align-items-center justify-content-between relative p-3">
+                <div class="image-wrapper">
+                    <img
+                        [src]="product.image"
+                        class="product-img"
+                        style="width: 90px; height: 90px"
+                        alt=""
+                    />
+                </div>
 
-                    <div>
-                        <!-- sağ üst icon -->
-                        <button
-                            type="button"
-                            pRipple
-                            class="p-link w-3rem h-3rem
-         surface-0
-         border-circle
-         border-2 border-transparent
-         shadow-3
-         inline-flex align-items-center justify-content-center
-         absolute
-         transition-all transition-duration-300
-         hover:border-orange-300
-         active:border-orange-500
-         focus-visible:border-orange-500"
-                            style="top: -0.5rem; right: -0.2rem">
-
-                            <i class="pi pi-shopping-cart
-            text-orange-500
-            text-2xl
-            transition-colors transition-duration-200
-            hover:text-green-600">
-                            </i>
-                        </button>
-
-                    </div>
+                <div>
+                    <!-- sağ üst icon -->
+                    <button
+                        type="button"
+                        pRipple
+                        class="p-link w-3rem h-3rem
+                            surface-0
+                            border-circle
+                            border-2 border-transparent
+                            shadow-3
+                            inline-flex align-items-center justify-content-center
+                            absolute
+                            transition-all transition-duration-300
+                            hover:border-orange-300
+                            active:border-orange-500
+                            focus-visible:border-orange-500"
+                        style="top: -0.5rem; right: -0.2rem"
+                    >
+                        <i
+                            class="pi pi-shopping-cart
+                                text-orange-500
+                                text-2xl
+                                transition-colors transition-duration-200
+                                hover:text-green-600"
+                        ></i>
+                    </button>
+                </div>
             </div>
-
         </div>
     </div>
+</div>
+
+</div>
 
 
