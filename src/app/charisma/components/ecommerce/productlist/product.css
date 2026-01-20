@@ -46,6 +46,25 @@
     z-index: 2;
 }
 
+.productlist-video-unlock {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 3;
+    border: 1px solid rgba(251, 146, 60, 0.35);
+    border-radius: 999px;
+    padding: 0.6rem 0.9rem;
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(15, 18, 23, 0.38);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
+}
+
+.productlist-video-unlock:active {
+    transform: translateY(1px);
+}
+
 /* If the phone blocks autoplay, keep a subtle “alive” flame shimmer anyway */
 :host:not(.video-playing) .productlist-bg-overlay {
     animation: productlist-flame-fallback 6s ease-in-out infinite;

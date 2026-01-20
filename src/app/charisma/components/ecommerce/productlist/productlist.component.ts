@@ -90,6 +90,25 @@ export class ProductListComponent implements AfterViewInit, OnDestroy{
             window.removeEventListener('click', unlock);
         });
     }
+
+    unlockBackgroundVideo() {
+        const video = this.bgVideo?.nativeElement;
+        if (!video) return;
+        try {
+            video.muted = true;
+            video.playsInline = true;
+            (video as any).webkitPlaysInline = true;
+        } catch {
+            // ignore
+        }
+
+        const playPromise = video.play();
+        if (playPromise && typeof (playPromise as any).catch === 'function') {
+            (playPromise as Promise<void>).catch(() => {
+                // ignore
+            });
+        }
+    }
     ngOnDestroy() {
         if (this.intervalId) {
             clearInterval(this.intervalId);
