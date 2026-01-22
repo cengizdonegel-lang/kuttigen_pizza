@@ -65,6 +65,17 @@
     }
 }
 
+/* Tablet widths (landscape iPad etc.): keep the menu button slightly inset from the right */
+@media screen and (min-width: $breakpoint) and (max-width: 1200px) {
+    .layout-topbar {
+        .layout-topbar-start {
+            .layout-menu-button {
+                right: 0.75rem;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: ($breakpoint - 1)) {
     .blocked-scroll {
         overflow: hidden;
@@ -187,8 +198,10 @@
             .layout-menu-button {
                 position: relative;
                 margin-top: 0;
-                margin-left: 1rem;
+                margin-left: auto;
+                margin-right: 1.75rem;
                 top: auto;
+                right: auto;
             }
 
             .layout-topbar-mobile-button {

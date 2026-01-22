@@ -1,28 +1,3 @@
-<video
-    #bgVideo
-    class="productlist-bg-video"
-    autoplay
-    muted
-    loop
-    playsinline
-    webkit-playsinline
-    preload="auto"
-    disablepictureinpicture
-    aria-hidden="true"
->
-    <source src="https://cdn.pixabay.com/video/2018/07/08/17176-278954641_large.mp4" type="video/mp4" />
-</video>
-<div class="productlist-bg-overlay"></div>
-
-<button
-	*ngIf="!isVideoPlaying"
-	type="button"
-	class="productlist-video-unlock"
-	(click)="unlockBackgroundVideo()"
->
-	Canlı arka planı başlat
-</button>
-
 <div class="productlist-container" [class.marquee-hidden]="isMarqueeCollapsed">
 
 <div
@@ -43,12 +18,7 @@
 
         <ng-container *ngFor="let product of products2">
             <div class="product-item">
-                <div class="card border-3 border-orange-100 border-round-2xl p-4 marquee-card
-                    transition-all transition-duration-300 ease-out
-                    hover:border-orange-400
-                    hover:bg-orange-50
-                    hover:shadow-4
-                    hover:scale-105">
+                <div class="card border-round-2xl p-4 marquee-card productlist-card">
 
                     <!-- ÜST KISIM (avatar + bilgiler) -->
                     <div class="flex border-bottom-1 surface-border pb-4 align-items-start">
@@ -100,12 +70,7 @@
         <!-- kopya: kesintisiz akış için -->
         <ng-container *ngFor="let product of products2">
             <div class="product-item">
-                <div class="card border-3 border-orange-100 border-round-2xl p-4 marquee-card
-                    transition-all transition-duration-300 ease-out
-                    hover:border-orange-400
-                    hover:bg-orange-50
-                    hover:shadow-4
-                    hover:scale-105">
+                <div class="card border-round-2xl p-4 marquee-card productlist-card">
 
                     <div class="flex border-bottom-1 surface-border pb-4 align-items-start">
                         <img
@@ -156,14 +121,9 @@
     </div>
 </div>
 
-<div class="grid">
-    <div class="col-12 sm:col-6 lg:col-3 p-3" *ngFor="let product of products2">
-        <div class="card border-3 border-orange-100 border-round-2xl
-            transition-all transition-duration-300 ease-out
-            hover:border-orange-400
-            hover:bg-orange-50
-            hover:shadow-4
-            hover:scale-105">
+<div class="productlist-grid">
+    <div class="productlist-grid-item" *ngFor="let product of products2">
+        <div class="card border-round-2xl productlist-card">
 
             <div class="flex align-items-center justify-content-between relative p-3">
                 <div class="image-wrapper">

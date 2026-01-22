@@ -4,7 +4,6 @@
     margin-top: 1.5rem;
 }
 
-/* Product List page: subtle oven/fire vibe background */
 :host {
     display: block;
     position: relative;
@@ -12,129 +11,111 @@
     min-height: 100vh;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
+	/* Plain, colorless background */
+	background: var(--surface-ground, #f5f5f5);
+	color: var(--text-color, #111827);
+
+    /* Subtle orange accent for borders/hover */
+    --productlist-orange: 249, 115, 22; /* approx Tailwind orange-500 */
+    --productlist-orange-border: rgba(var(--productlist-orange), 0.22);
+    --productlist-orange-border-hover: rgba(var(--productlist-orange), 0.34);
+    --productlist-orange-tint: rgba(var(--productlist-orange), 0.035);
+    --productlist-orange-glow: rgba(var(--productlist-orange), 0.10);
 }
 
-.productlist-bg-video {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-    pointer-events: none;
-	opacity: 0.62;
-	filter: saturate(1.15) contrast(1.18) brightness(0.88);
-	transform: translateZ(0);
-	-webkit-transform: translateZ(0);
-}
-
-.productlist-bg-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background:
-        radial-gradient(900px 520px at 20% 10%, rgba(255, 237, 213, 0.20) 0%, rgba(255, 237, 213, 0) 65%),
-        linear-gradient(180deg, rgba(15, 18, 23, 0.42) 0%, rgba(15, 18, 23, 0.58) 100%);
-    backdrop-filter: blur(0.8px);
-    -webkit-backdrop-filter: blur(0.8px);
-}
-
-/* Ensure actual page content stays above the background layers */
-:host > :not(.productlist-bg-video):not(.productlist-bg-overlay) {
+/* Ensure actual page content stays above any potential background layers */
+:host > * {
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .productlist-container {
-    max-width: 1440px;
+	/* Full-bleed: no centered max-width */
+    max-width: none;
     width: 100%;
-    margin: 0 auto;
-    padding: 1.25rem clamp(1rem, 2.5vw, 2rem) 2rem;
+	margin: 0;
+	/* Keep a consistent gutter so cards don't stick to the edges */
+    padding: 1.25rem 1rem 2rem;
     box-sizing: border-box;
     transform: none;
 }
 
-.productlist-container .grid {
+@media (min-width: 992px) {
+    .productlist-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* Product grid: 4 cards side-by-side on desktop */
+.productlist-grid {
     width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    justify-content: center;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    align-items: stretch;
 }
 
-/* When marquee collapses, visually center cards on the page */
-.productlist-container.marquee-hidden .grid {
-    justify-content: center !important;
-}
-
-.productlist-video-unlock {
-    position: fixed;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 3;
-    border: 1px solid rgba(251, 146, 60, 0.35);
-    border-radius: 999px;
-    padding: 0.6rem 0.9rem;
-    color: rgba(255, 255, 255, 0.92);
-    background: rgba(15, 18, 23, 0.38);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
-}
-
-.productlist-video-unlock:active {
-    transform: translateY(1px);
-}
-
-/* If the phone blocks autoplay, keep a subtle “alive” flame shimmer anyway */
-:host:not(.video-playing) .productlist-bg-overlay {
-    animation: productlist-flame-fallback 6s ease-in-out infinite;
-}
-
-@keyframes productlist-flame-fallback {
-    0% {
-        filter: saturate(1.0) brightness(1.0);
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-    50% {
-        filter: saturate(1.1) brightness(1.06);
-        opacity: 0.96;
-        transform: translate3d(0, -6px, 0);
-    }
-    100% {
-        filter: saturate(1.0) brightness(1.0);
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
+@media (min-width: 640px) {
+    .productlist-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-/* Make text on top of video feel sharper */
+@media (min-width: 1024px) {
+    .productlist-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.productlist-grid-item {
+    min-width: 0;
+}
+
+.productlist-grid-item .card {
+    height: 100%;
+}
+
+/* Keep alignment consistent even when marquee collapses */
+.productlist-container.marquee-hidden .productlist-grid {
+    justify-content: space-between !important;
+}
+
+/* Neutral text (no video-specific sharpening) */
 .product-marquee,
 .grid {
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+	color: inherit;
+	text-shadow: none;
 }
 
-/* Ensure the PrimeFlex `.card` blocks are readable over motion */
+/* Plain cards (no glass/image backgrounds, no orange tint) */
 .card {
-    background-color: var(--glass-bg-strong) !important;
-    background-image: var(--glass-rain-2) !important;
-    background-size: cover !important;
-    background-position: 0 0 !important;
-    background-repeat: no-repeat !important;
-    border-color: rgba(251, 146, 60, 0.28) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+	background-color: var(--surface-card, #ffffff) !important;
+	background-image: none !important;
+    border-color: var(--surface-border, rgba(0, 0, 0, 0.10)) !important;
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .productlist-bg-video {
-        animation: none;
-    }
+/* Product list cards: subtle transparent orange edge + very light hover tint */
+.productlist-card {
+    border: 1px solid var(--productlist-orange-border) !important;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    transition:
+        border-color 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
 }
-.product-card {
-    border: 1px solid var(--surface-d);
+
+.productlist-card:hover {
+    border-color: var(--productlist-orange-border-hover) !important;
+    background-color: var(--productlist-orange-tint) !important;
+    box-shadow:
+        0 12px 26px rgba(0, 0, 0, 0.08),
+        0 0 0 3px var(--productlist-orange-glow);
+    transform: translateY(-1px);
 }
 
 /* Track: tek satır akacak */
@@ -155,17 +136,12 @@
 	padding: 0;
 }
 
-/* border’ı inline yerine buraya al */
-.product-card{
-    border: 1px solid var(--surface-d);
-}
-
 /* Marquee: smooth hide without layout jump (two-phase: fade -> collapse height) */
 .product-marquee-shell {
     --marquee-h: 0px;
     max-height: var(--marquee-visible-h, var(--marquee-h));
     overflow: hidden;
-    margin: 0 auto 1.25rem;
+	margin: 0 0 1.25rem;
     will-change: max-height;
     transition: none;
 }
@@ -206,8 +182,8 @@
     left: 0;
     background: linear-gradient(
         to right,
-        rgba(255,237,213,0.28),
-        rgba(255,255,255,0)
+		rgba(245, 245, 245, 0.95),
+		rgba(245, 245, 245, 0)
     );
 }
 
@@ -216,46 +192,40 @@
     right: 0;
     background: linear-gradient(
         to left,
-        rgba(255,237,213,0.28),
-        rgba(255,255,255,0)
+		rgba(245, 245, 245, 0.95),
+		rgba(245, 245, 245, 0)
     );
-}
-/* Kart görünümü biraz daha soft */
-.product-card{
-    border: 1px solid var(--surface-d);
-    border-radius: 12px;
-    background-color: var(--glass-bg);
-    background-image: var(--glass-rain-2);
-    background-size: cover;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
 }
 .product-marquee{
     position: relative;
     width: 100%;
     overflow: hidden;
-
-	margin: 0 auto;
+    margin: 0;
 
     /* ÇERÇEVE */
-    border: 1px solid var(--surface-border, #e5e7eb);
+    border: 1px solid var(--productlist-orange-border);
     border-radius: 16px;
 
-    /* İç boşluk: biraz soldan/sağdan başlasın */
+	/* Keep same gutter as the page */
     padding: 1.25rem 1rem;
 
-    /* Hafif glass arka plan (global transparan tema ile uyumlu) */
-    background: rgba(255,255,255,0.10);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+	/* Plain background */
+	background: var(--surface-card, #ffffff);
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
 
     box-shadow:
-        0 8px 24px rgba(0,0,0,0.10),
-        inset 0 0 0 1px rgba(255,255,255,0.25);
+        0 8px 24px rgba(0,0,0,0.06),
+        0 0 0 3px rgba(var(--productlist-orange), 0.05);
 
     transition: none;
+}
+
+.product-marquee:hover {
+    border-color: var(--productlist-orange-border-hover);
+    box-shadow:
+        0 10px 28px rgba(0,0,0,0.08),
+        0 0 0 4px rgba(var(--productlist-orange), 0.07);
 }
 
 

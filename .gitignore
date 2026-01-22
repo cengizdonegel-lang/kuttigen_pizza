@@ -8,6 +8,9 @@ coverage/
 # OS/editor noise
 .DS_Store
 
+# IDE
+.idea/
+
 # Local-only media (use CDN instead)
 src/assets/charisma/videos/
 
